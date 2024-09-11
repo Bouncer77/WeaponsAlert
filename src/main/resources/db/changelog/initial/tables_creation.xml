@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                   https://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+
+    <changeSet  id="initial_tables_creation"  author="Ivan Kosenkov">
+        <createTable  tableName="weapons">
+            <column name="uuid" type="varchar(36)" valueComputed="${uuid_function}" defaultValueComputed="${uuid_function}">
+                <constraints  primaryKey="true"  nullable="false"/>
+            </column>
+
+            <column  name="name"  type="varchar(255)" >
+                <constraints  nullable="false"/>
+            </column>
+
+            <column  name="version"  type="varchar(255)">
+                <constraints  nullable="true"/>
+            </column>
+
+            <column  name="description"  type="varchar(255)">
+                <constraints  nullable="true"/>
+            </column>
+        </createTable>
+
+        <addUniqueConstraint
+                columnNames="name, version"
+                constraintName="weapons_unique_constraint"
+                tableName="weapons"
+        />
+
+        <createTable  tableName="persons">
+
+            <column name="uuid" type="varchar(36)" valueComputed="${uuid_function}" defaultValueComputed="${uuid_function}">
+                <constraints  primaryKey="true"  nullable="false"/>
+            </column>
+
+            <column  name="login"  type="varchar(255)">
+                <constraints  nullable="false" unique="true"/>
+            </column>
+
+            <column  name="password"  type="varchar(255)">
+                <constraints  nullable="false"/>
+            </column>
+
+            <column  name="email"  type="varchar(255)">
+                <constraints  nullable="false" unique="true"/>
+            </column>
+
+            <column  name="role"  type="varchar(255)">
+                <constraints  nullable="false"/>
+            </column>
+
+            <column name="fullName"  type="varchar(255)" />
+        </createTable>
+
+        <comment>
+            Создание таблиц weapons, persons
+        </comment>
+    </changeSet>
+</databaseChangeLog>

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                   https://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+
+    <property name="uuid_function" value="public.uuid_generate_v4()" dbms="postgresql"/>
+    <property name="uuid_function" value="RANDOM_UUID()" dbms="h2"/>
+    <changeSet id="create uuid-ossp extension if not exists" author="Ivan Kosenkov" dbms="postgresql">
+        <sql>create extension if not exists "uuid-ossp" with schema public</sql>
+    </changeSet>
+
+    <include  file="initial/tables_creation.xml" relativeToChangelogFile="true"/>
+    <include  file="initial/initial_data_load.xml" relativeToChangelogFile="true"/>
+</databaseChangeLog>

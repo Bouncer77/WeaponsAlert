@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                   https://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+
+    <changeSet author="Ivan Kosenkov" id="insert_initial_data">
+        <loadData file="db/changelog/initial/data/weapons.csv"
+                  tableName="weapons"
+                  relativeToChangelogFile="false">
+            <column index="0" name="name" type="STRING"/>
+            <column index="1" name="version" type="STRING"/>
+            <column index="2" name="description" type="STRING"/>
+        </loadData>
+        <loadData file="db/changelog/initial/data/persons.csv"
+                  tableName="persons"
+                  relativeToChangelogFile="false">
+            <column index="0" name="login" type="STRING"/>
+            <column index="1" name="password" type="STRING"/>
+            <column index="2" name="email" type="STRING"/>
+            <column index="3" name="role" type="STRING"/>
+            <column index="4" name="fullName" type="STRING"/>
+        </loadData>
+        <comment>
+            Загрузка тестовых данных в таблицы weapons, persons
+        </comment>
+    </changeSet>
+</databaseChangeLog>
